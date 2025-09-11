@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained(
                 table: 'categories',
                 indexName: 'posts_category_id'
-            )->nullable();
+            );
             $table->text('body');
             $table->timestamps();
         });

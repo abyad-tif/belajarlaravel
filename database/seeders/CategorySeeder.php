@@ -18,14 +18,17 @@ class CategorySeeder extends Seeder
         Category::factory()->create([
             'name' => $category_seeder[0],
             'slug' => Str::slug($category_seeder[0]),
+            'color' => 'bg-red-100'
         ]);
         Category::factory()->create([
             'name' => $category_seeder[1],
             'slug' => Str::slug($category_seeder[1]),
+            'color' => 'bg-green-100'
         ]);
         Category::factory()->create([
             'name' => $category_seeder[2],
             'slug' => Str::slug($category_seeder[2]),
+            'color' => 'bg-blue-100'
         ]);
     }
 }
