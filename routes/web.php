@@ -12,27 +12,13 @@ Route::get('/', function () {
 
 Route::get('/posts', function () {
     // $posts = Post::with(['author', 'category'])->latest()->get()
-    $posts = Post::latest();
-
-    if (request('search')) {
-        $posts->where('title', 'like', '%' . request('search') . '%');
-    }
-
-    return view('posts', ['title' => 'Blog', 'posts' => $posts->get()]);
+    $posts = Post::latest()->filter(request(['search', 'category', 'author']))->get();
+  
+    return view('posts', ['title' => 'Blog', 'posts' => $posts]);
 });
 
 Route::get('/post/{post:slug}', function (Post $post) {
     return view('post', ['title' => 'Single Post', 'post' => $post]);
-});
-
-Route::get('/authors/{user:username}', function (User $user) {
-    // $posts = $user->post->load('author', 'category')
-    return view('posts', ['title' => count($user->post) . ' Posts from ' . $user->name, 'posts' => $user->post]);
-});
-
-Route::get('/categories/{category:slug}', function (Category $category) {
-    // $posts = $category->post->load('author', 'category')
-    return view('posts', ['title' => 'Category : ' . $category->name, 'posts' => $category->post]);
 });
 
 Route::get('/about', function () {
