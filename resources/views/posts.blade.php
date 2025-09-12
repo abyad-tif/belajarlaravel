@@ -21,8 +21,10 @@
     </div>
     </form>
 
+    {{ $posts->links() }}
+
       <div class="grid gap-8 lg:grid-cols-3 md:grid-cols-2">
-          @foreach ($posts as $post)
+          @forelse ($posts as $post)
           <article class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
               <div class="flex justify-between items-center mb-5 text-gray-500">
                   <a href="/posts?category={{ $post->category->slug }}">
@@ -49,7 +51,12 @@
                   </a>
               </div>
           </article>
-          @endforeach                  
+          @empty
+            <div>
+              <p class="font-semibold text-xl my-4">Article not found</p>
+              <a href="/posts" class="block text-blue-500 hover:underline">&laquo; Back to all posts</a>
+            </div>
+          @endforelse                  
       </div>  
   </div>
 
